@@ -1,4 +1,15 @@
+.mapview-wrapper {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
 .location-marker {
   cursor: pointer;
-  image-rendering: pixelated;
+}
+
+.map-wrapper {
+  flex-grow: 1;
 }

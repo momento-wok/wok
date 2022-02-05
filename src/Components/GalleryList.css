@@ -1,0 +1,33 @@
+.gallery-wrapper {
+  width: 340px;
+  padding: 16px;
+  padding-top: 0;
+  overflow-y: auto;
+}
+
+.gallery-wrapper > h3 {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 0;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+}
+
+.gallery-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 0.9em;
+}
+
+.gallery-item {
+  cursor: pointer;
+}
+
+.gallery-item > img {
+  width: 100%;
+}
