@@ -47,6 +47,12 @@ class MapView extends React.Component {
   render() {
     return (
       <div className="mapview-wrapper">
+        <div className="nav">
+          <button class= "active">Upload Image</button>
+          <button onClick={() => this.props.setView("map")}>Map</button>
+          <button>Gallery</button>
+          <button>Sign Out</button>
+        </div>
         <div className="map-wrapper">
           <Map
             // eslint-disable-next-line
@@ -79,6 +85,7 @@ class MapView extends React.Component {
         </div>
         <GalleryList memories={this.props.memories} moveMapToPoint={this.moveMapToPoint} />
         <button style={{ position: "absolute", top: 8, left: 8 }} onClick={() => this.props.setView("upload")}>UPLOAD</button>
+        
       </div>
     )
   }

@@ -1,4 +1,6 @@
 import compress from 'compress.js';
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+
 
 const resizeImg = async (file) => {
   const resizedImage = await compress.compress([file], {
@@ -17,6 +19,14 @@ const resizeImg = async (file) => {
 
 const uploadMemory = async (img, coordinates, name) => {
   console.log("uploadMemory")
+  // Create a root reference
+  const storage = getStorage();
+  
+  // Create a reference to 'mountains.jpg'
+  const imgRef = ref(storage, 'uploaded_img_name');
+  uploadBytes(imgRef, img).then((snapshot) => {
+    console.log('Uploaded a blob or file!');
+  });
 }
 
 export { resizeImg, uploadMemory };
