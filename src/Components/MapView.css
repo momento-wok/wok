@@ -1,0 +1,4 @@
+.location-marker {
+  cursor: pointer;
+  image-rendering: pixelated;
+}

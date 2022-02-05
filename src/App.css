@@ -1,0 +1,12 @@
+.app-wrapper {
+  height: 200vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: 0.6s;
+}
+
+.app-wrapper > div {
+  flex-grow: 1;
+}

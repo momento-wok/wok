@@ -1,0 +1,38 @@
+[
+  {
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Veste_Oberhaus_%28Passau%2C_full_spherical_panoramic_image%2C_equirectangular_projection%29.jpg",
+    "location": {
+      "latitude": 48.5777,
+      "longitude": 13.4711
+    }
+  },
+
+  {
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/18/Rheingauer_Dom%2C_Geisenheim%2C_360_Panorama_%28Equirectangular_projection%29.jpg",
+    "location": {
+      "latitude": 49.9827,
+      "longitude": 7.9673
+    }
+  },
+  {
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Efferen_360%C2%B0_Panorama.jpg",
+    "location": {
+      "latitude": 50.8938,
+      "longitude": 6.8941
+    }
+  },
+  {
+    "imageUrl": "http://blog.topazlabs.com/wp-content/uploads/2013/07/Screen-Shot-2013-12-11-at-10.42.18-AM.png",
+    "location": {
+      "latitude": 25.4615,
+      "longitude": 36.3932
+    }
+  },
+  {
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Landschaftspark-Duisburg-Nord_Hochofen_Panorama.jpg",
+    "location": {
+      "latitude": 6.7821,
+      "longitude": 51.4825
+    }
+  }
+]
