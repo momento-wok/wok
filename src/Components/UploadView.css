@@ -1,0 +1,12 @@
+.uploadview-wrapper {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+.temp {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(211, 211, 211, 0.7), rgba(211, 211, 211, 0.7)), url("../../public/wok.jpg") 50% / cover;
+}
+

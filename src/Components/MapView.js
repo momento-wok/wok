@@ -62,7 +62,7 @@ class MapView extends React.Component {
             }}
           >
             {
-              this.props.data.map((location, i) => {
+              this.props.memories.map((location, i) => {
                 return (
                   <Marker
                     key={i}
@@ -77,7 +77,8 @@ class MapView extends React.Component {
             }
           </Map>
         </div>
-        <GalleryList data={this.props.data} moveMapToPoint={this.moveMapToPoint} />
+        <GalleryList memories={this.props.memories} moveMapToPoint={this.moveMapToPoint} />
+        <button style={{ position: "absolute", top: 8, left: 8 }} onClick={() => this.props.setView("upload")}>UPLOAD</button>
       </div>
     )
   }

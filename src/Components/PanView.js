@@ -7,6 +7,9 @@ class PanView extends React.Component {
   }
 
   render() {
+    if (!this.props.memory) {
+      return null;
+    }
     return (
       <div className="panview-wrapper">
         <button className="arrow-up-button" onClick={this.handleClick}>
@@ -17,7 +20,7 @@ class PanView extends React.Component {
             keyboard_arrow_up
           </span>
         </button>
-        <iframe className="panview" title="panorama" src={`https://momento-wok.github.io/pan/?url=${this.props.data.imageUrl}`} />
+        <iframe className="panview" title="panorama" src={`https://momento-wok.github.io/pan/?url=${this.props.memory.imageUrl}`} />
       </div>
     )
   }

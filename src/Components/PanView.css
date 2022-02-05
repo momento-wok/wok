@@ -1,6 +1,6 @@
 .panview-wrapper {
-  height: 100vh;
-  width: 100%;
+  grid-column: 2;
+  grid-row: 2;
   position: relative;
 }
 

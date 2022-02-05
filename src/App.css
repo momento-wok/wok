@@ -1,9 +1,9 @@
 .app-wrapper {
-  width: 100vw;
   overflow: hidden;
   transition: 0.6s;
-}
-
-.app-wrapper > div {
-  flex-grow: 1;
+  width: 200vw;
+  height: 200vh;
+  display: grid;
+  grid-template-rows: repeat(2, 100vh);
+  grid-template-columns: repeat(2, 100vw);
 }
