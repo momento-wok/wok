@@ -39,10 +39,12 @@ class UploadView extends React.Component {
 
       await uploadMemory(file, { longitude, latitude }, this.incrementStepsComplete);
 
-      this.setFileUploadDisplayText("Select 360° Panorama Image");
-      this.setState({
-        uploading: false
-      });
+      setTimeout(() => {
+        this.setState({
+          uploading: false
+        });
+        this.setFileUploadDisplayText("Select 360° Panorama Image");
+      }, 2500);
       this.props.fetchMemories();
     });
   }

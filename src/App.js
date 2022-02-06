@@ -8,6 +8,8 @@ import UploadView from './Components/UploadView';
 
 import { getMemories } from './db/retrieveorsomething';
 
+import inlineLogo from "./logo-inline.png";
+
 class App extends React.Component {
 
   constructor(props) {
@@ -51,7 +53,9 @@ class App extends React.Component {
         <Page style={{ marginTop: view === "panorama" ? "-100vh" : 0 }}>
           {
             view !== "home" &&
-            <div className={["nav", (view === "map" || view === "panorama") ? "solid" : null].join(" ")}>
+            <div className="nav">
+              <img src={inlineLogo} style={{ height: 54, imageRendering: "pixelated", padding: "0 16px" }} />
+              <div style={{ flexGrow: 1}} />
               <div className="button-wrapper">
                 <button onClick={() => this.setView("map")}>Map</button>
                 <button onClick={() => this.setView("upload")}>Upload</button>

@@ -6,15 +6,11 @@
 
 .nav {
   display: flex;
-  justify-content: flex-end;
   position: relative;
   z-index: 100000;
-  background-color: #ffffff40;
-}
-
-.nav.solid {
   background-color: #ffffff;
   box-shadow: 0 0 8px 0 #00000020;
+  align-items: center;
 }
 
 .nav .button-wrapper {
@@ -22,13 +18,14 @@
 }
 
 .nav button {
-  margin: 10px;
+  margin: 15px;
   padding: 5px;
   padding-right: 10px;
   background-color: transparent;
   border: none;
-  font-size: 24px;
-  font-family: "Playball", serif;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
   cursor: pointer;
 }
 
