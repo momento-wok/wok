@@ -21,6 +21,7 @@ class MapView extends React.Component {
         longitude: 8,
         latitude: 30,
         zoom: 1.8,
+        pitch: 60,
       }
     }
   }
@@ -31,15 +32,16 @@ class MapView extends React.Component {
   }
 
   handleMapMove = (map) => {
-    this.moveMapToPoint(map.getCenter().lng, map.getCenter().lat, map.getZoom());
+    this.moveMapToPoint(map.getCenter().lng, map.getCenter().lat, map.getZoom(), map.getPitch());
   };
 
-  moveMapToPoint = (longitude, latitude, zoom) => {
+  moveMapToPoint = (longitude, latitude, zoom, pitch=this.state.mapViewport.pitch) => {
     this.setState({
       mapViewport: {
         longitude: longitude,
         latitude: latitude,
         zoom: zoom,
+        pitch: pitch,
       }
     });
   }
@@ -47,18 +49,13 @@ class MapView extends React.Component {
   render() {
     return (
       <div className="mapview-wrapper">
-        <div className="nav">
-          <button class= "active">Upload Image</button>
-          <button onClick={() => this.props.setView("map")}>Map</button>
-          <button>Gallery</button>
-          <button>Sign Out</button>
-        </div>
         <div className="map-wrapper">
           <Map
             // eslint-disable-next-line
             style="mapbox://styles/derpcheese69/ckz9ixt5v000016o0azpswslq"
             center={[this.state.mapViewport.longitude, this.state.mapViewport.latitude]}
             zoom={[this.state.mapViewport.zoom]}
+            pitch= {[this.state.mapViewport.pitch]}
             onMoveEnd={this.handleMapMove}
             onZoomEnd={this.handleMapMove}
             onPitchEnd={this.handleMapMove}
@@ -84,8 +81,6 @@ class MapView extends React.Component {
           </Map>
         </div>
         <GalleryList memories={this.props.memories} moveMapToPoint={this.moveMapToPoint} />
-        <button style={{ position: "absolute", top: 8, left: 8 }} onClick={() => this.props.setView("upload")}>UPLOAD</button>
-        
       </div>
     )
   }

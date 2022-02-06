@@ -1,9 +1,9 @@
 .mapview-wrapper {
-  grid-column: 2;
-  grid-row: 1;
   position: relative;
   display: flex;
   flex-direction: row;
+  flex: 1;
+  height: 0;
 }
 
 .location-marker {
@@ -13,33 +13,4 @@
 .map-wrapper {
   position: relative;
   flex-grow: 1;
-}
-
-.nav {
-  position: absolute;
-  display:inline;
-  float:right;
-}
-
-.nav button{
- 
-  margin: 10px;
-  padding: 5px;
-  padding-right: 10px;
-  background-color: red;
-  border: none;
-  font-size: 30px;
-  font-family: "Playball", serif;
-  color: black;
- 
- 
-}
-
-
-.nav .active, .nav button:hover{
-  
-  background: rgba(69,69,69,0.5);
-  border-color: black;
-  border-radius: 10px;
-  cursor:pointer;
 }

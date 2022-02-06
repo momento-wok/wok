@@ -1,7 +1,7 @@
 .panview-wrapper {
-  grid-column: 2;
-  grid-row: 2;
   position: relative;
+  height: 100vh;
+  width: 100vw;
 }
 
 .panview {
@@ -30,4 +30,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  z-index: 4572345324573454235;
 }

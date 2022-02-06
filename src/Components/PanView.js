@@ -6,9 +6,14 @@ class PanView extends React.Component {
     this.props.setView("map");
   }
 
+  updateUrl = (url) => {
+    console.log( url.replace("&", "%26"));
+    return url.replace("&", "%26");
+  }
+
   render() {
     if (!this.props.memory) {
-      return null;
+      return <div className="panview-wrapper" />;
     }
     return (
       <div className="panview-wrapper">
@@ -20,7 +25,11 @@ class PanView extends React.Component {
             keyboard_arrow_up
           </span>
         </button>
-        <iframe className="panview" title="panorama" src={`https://momento-wok.github.io/pan/?url=${this.props.memory.imageUrl}`} />
+        <iframe
+          className="panview"
+          title="panorama"
+          src={`https://momento-wok.github.io/pan/?url=${this.updateUrl(this.props.memory.imageUrl)}`}
+        />
       </div>
     )
   }

@@ -7,7 +7,7 @@ class GalleryList extends React.Component {
 
   handleGalleryItemClick = (i) => {
     let location = this.props.memories[i];
-    this.props.moveMapToPoint(location.coordinates.longitude, location.coordinates.latitude, 3.6);
+    this.props.moveMapToPoint(location.coordinates.longitude, location.coordinates.latitude, 5);
   }
 
   coordinateDisplayText(longitude, latitude) {

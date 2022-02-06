@@ -1,7 +1,8 @@
 import React from "react";
 import './App.css';
+import PanView from "./Components/PanView";
 import MapView from "./Components/MapView";
-import PanView from './Components/PanView';
+import Page from "./Components/Page";
 import UploadView from './Components/UploadView';
 
 import { getMemories } from './db/retrieveorsomething';
@@ -27,6 +28,7 @@ class App extends React.Component {
     this.setState({
       view: newView
     });
+    console.log(newView)
   }
 
   async componentDidMount() {   
@@ -37,28 +39,31 @@ class App extends React.Component {
     });
   }
 
-  viewPositions = {
-    "map": {
-      row: "0",
-      col: "100vw"
-    },
-    "panorama": {
-      row: "100vh",
-      col: "100vw"
-    },
-    "upload": {
-      row: "0",
-      col: "0"
-    },
-  }
-
   render() {
     let { memories, selectedLocation, view } = this.state;
     return (
-      <div className="app-wrapper" style={{ marginTop: "-" + this.viewPositions[view].row, marginLeft: "-" + this.viewPositions[view].col }}>
-        <UploadView setView={this.setView} />
-        <MapView memories={memories} setView={this.setView} setSelectedLocation={this.setSelectedLocation} />
-        <PanView memory={selectedLocation === undefined ? null : memories[selectedLocation]} setView={this.setView} />
+      <div className="app-wrapper">
+        <Page style={{ marginTop: this.state.view === "panorama" ? "-100vh" : 0 }}>
+          <div className="nav">
+            <div class="button-wrapper">
+              <button onClick={() => this.setView("map")}>Map</button>
+              <button onClick={() => this.setView("upload")}>Upload</button>
+              <button>Gallery</button>
+              <button>Sign Out</button>
+            </div>
+          </div>
+          {
+            (this.state.view === "map" || this.state.view === "panorama") &&
+            <MapView memories={memories} setView={this.setView} setSelectedLocation={this.setSelectedLocation} />
+          }
+          {
+            this.state.view === "upload" &&
+            <UploadView setView={this.setView} />
+          }
+        </Page>
+        <Page>
+          <PanView memory={selectedLocation === undefined ? null : memories[selectedLocation]} setView={this.setView} />
+        </Page>
       </div>
     );
   }
