@@ -4,6 +4,7 @@
   flex-direction: row;
   flex: 1;
   height: 0;
+  background: #ffffff;
 }
 
 .location-marker {

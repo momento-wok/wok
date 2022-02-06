@@ -1,5 +1,6 @@
 import React from "react";
 import './App.css';
+import Homepage from "./Components/Homepage";
 import PanView from "./Components/PanView";
 import MapView from "./Components/MapView";
 import Page from "./Components/Page";
@@ -12,7 +13,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: "map",
+      view: "home",
       selectedLocation: undefined,
       memories: [],
     };
@@ -43,21 +44,28 @@ class App extends React.Component {
     let { memories, selectedLocation, view } = this.state;
     return (
       <div className="app-wrapper">
-        <Page style={{ marginTop: this.state.view === "panorama" ? "-100vh" : 0 }}>
-          <div className="nav">
-            <div class="button-wrapper">
-              <button onClick={() => this.setView("map")}>Map</button>
-              <button onClick={() => this.setView("upload")}>Upload</button>
-              <button>Gallery</button>
-              <button>Sign Out</button>
-            </div>
-          </div>
+        <Page style={{ marginTop: view === "panorama" ? "-100vh" : 0 }}>
           {
-            (this.state.view === "map" || this.state.view === "panorama") &&
+            view !== "home" &&
+            <div className={["nav", (view === "map" || view === "panorama") ? "solid" : null].join(" ")}>
+              <div className="button-wrapper">
+                <button onClick={() => this.setView("map")}>Map</button>
+                <button onClick={() => this.setView("upload")}>Upload</button>
+                <button>Gallery</button>
+                <button onClick={() => this.setView("home")}>Sign Out</button>
+              </div>
+            </div>
+          }
+          {
+            view === "home" &&
+            <Homepage setView={this.setView} />
+          }
+          {
+            (view === "map" || view === "panorama") &&
             <MapView memories={memories} setView={this.setView} setSelectedLocation={this.setSelectedLocation} />
           }
           {
-            this.state.view === "upload" &&
+            view === "upload" &&
             <UploadView setView={this.setView} />
           }
         </Page>

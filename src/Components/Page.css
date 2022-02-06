@@ -5,6 +5,7 @@
   flex-direction: column;
   position: relative;
   transition: 0.4s;
+  background: linear-gradient(rgba(211, 211, 211, 0.7), rgba(211, 211, 211, 0.7)), url("../../public/wok.jpg") 50% / cover;
 }
 
 .page-wrapper .nav {

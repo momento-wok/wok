@@ -17,7 +17,7 @@ const resizeImg = async (file) => {
   return resizedFile;
 }
 
-const uploadMemory = async (img, coordinates, name) => {
+const uploadMemory = async (img) => {
   console.log("uploadMemory")
   // Create a root reference
   const storage = getStorage();

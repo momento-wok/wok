@@ -9,6 +9,10 @@
   justify-content: flex-end;
   position: relative;
   z-index: 100000;
+  background-color: #ffffff40;
+}
+
+.nav.solid {
   background-color: #ffffff;
   box-shadow: 0 0 8px 0 #00000020;
 }
