@@ -32,12 +32,16 @@ class App extends React.Component {
     console.log(newView)
   }
 
-  async componentDidMount() {   
+  fetchMemories = async () => {
     let memories = await getMemories();
     memories.sort((a, b) => b.coordinates.latitude - a.coordinates.latitude);
     this.setState({
       memories: memories
     });
+  }
+
+  componentDidMount() {   
+    this.fetchMemories();
   }
 
   render() {
@@ -66,7 +70,7 @@ class App extends React.Component {
           }
           {
             view === "upload" &&
-            <UploadView setView={this.setView} />
+            <UploadView setView={this.setView} fetchMemories={this.fetchMemories} />
           }
         </Page>
         <Page>

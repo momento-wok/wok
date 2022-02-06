@@ -7,7 +7,7 @@ class PanView extends React.Component {
   }
 
   updateUrl = (url) => {
-    console.log( url.replace("&", "%26"));
+    console.log("updating url")
     return url.replace("&", "%26");
   }
 

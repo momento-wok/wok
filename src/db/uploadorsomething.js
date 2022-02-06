@@ -1,15 +1,52 @@
 import imageCompression from 'browser-image-compression';
 import { addDoc, collection } from 'firebase/firestore/lite';
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import db from './db';
+const async = require('async');
+// const fs = require('fs');
+// const https = require('https');
+// const path = require("path");
+// const createReadStream = require('fs').createReadStream
+// const sleep = require('util').promisify(setTimeout);
+const ComputerVisionClient = require('@azure/cognitiveservices-computervision').ComputerVisionClient;
+const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
 
-const resizeImg = async (file) => {
-  console.log('originalFile instanceof Blob', file instanceof Blob); // true
+const getDescription = async (url) => {
+  const key = '42d55dd7cec3423cacb35c1da60daf09';
+  const endpoint = 'https://imgdescription.cognitiveservices.azure.com/';
+
+  const computerVisionClient = new ComputerVisionClient(
+    new ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': key } }), endpoint);
+
+  function computerVision() {
+    async.series([
+      async function () {},
+      function () {
+        return new Promise((resolve) => {
+          resolve();
+        })
+      }
+    ], (err) => {
+      throw (err);
+    });
+  }
+  
+  computerVision();
+
+  // Analyze URL image
+  console.log('Analyzing URL image to describe...', url.split('/').pop());
+  const caption = (await computerVisionClient.describeImage(url)).captions[0];
+  console.log(`This may be ${caption.text} (${caption.confidence.toFixed(2)} confidence)`);
+
+  return caption.text;
+}
+
+const resizeImg = async (file, maxSize) => {
   console.log(`originalFile size ${file.size / 1024 / 1024} MB`);
 
   const options = {
     maxSizeMB: 3,
-    maxWidthOrHeight: 500,
+    maxWidthOrHeight: maxSize,
     useWebWorker: true
   }
   try {
@@ -25,7 +62,6 @@ const resizeImg = async (file) => {
 
 const uploadPan = async (img) => {
   try {
-    console.log("uploadMemory")
     // Create a root reference
     const storage = getStorage();
     
@@ -35,9 +71,7 @@ const uploadPan = async (img) => {
     await uploadBytes(imgRef, img)
     console.log('Uploaded a blob or file!');
   
-    // TODO: get the URL.
-    let downloadURL = await getDownloadURL(imgRef);
-    return downloadURL;
+    return {ref: imgRef, url: await getDownloadURL(imgRef)};
   }
   catch(err) {
     console.log(err)
@@ -55,19 +89,43 @@ const uploadDoc = async (data) => {
   }
 }
 
-const uploadMemory = async (img, coordinates, name) => {
+const uploadMemory = async (img, coordinates, incrementSteps) => {
   try {
-    const resizedImg = await resizeImg(img);
+    const thumbnail = await resizeImg(img, 800);
+    incrementSteps();
+    const forDescription = await resizeImg(img, 2000);
+    incrementSteps();
     
     // upload original and thumbnail
-    const imageUrl = await uploadPan(img);
-    const thumbnailUrl = await uploadPan(resizedImg);
-  
-    console.log(imageUrl)
-    console.log(thumbnailUrl)
+    const imageUploadResult = await uploadPan(img);
+    incrementSteps();
+    const thumbnailUploadResult = await uploadPan(thumbnail);
+    incrementSteps();
+    const forDescriptionUploadResult = await uploadPan(forDescription);
+    incrementSteps();
+
+    // generate name
+    let name = await getDescription(forDescriptionUploadResult.url);
+    incrementSteps();
+
+    console.log("description:", name)
   
     // upload memory
-    await uploadDoc({imageUrl, thumbnailUrl, coordinates, name});
+    await uploadDoc({
+      imageUrl: imageUploadResult.url,
+      thumbnailUrl: thumbnailUploadResult.url,
+      coordinates,
+      name: name
+    });
+    incrementSteps();
+
+    // delete file used for description
+    deleteObject(forDescriptionUploadResult.ref).then(() => {
+      // File deleted successfully
+      incrementSteps();
+    }).catch((err) => {
+      console.log("Error cleaning description file:", err)
+    });
   }
   catch(err) {
     console.log("ERROR uploading memory:", err)

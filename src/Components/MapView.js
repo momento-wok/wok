@@ -72,8 +72,9 @@ class MapView extends React.Component {
                     coordinates={[location.coordinates.longitude, location.coordinates.latitude]}
                     onClick={() => this.showPanorama(i)}
                     anchor="bottom"
+                    className="location-marker"
                   >
-                    <img className="location-marker" src={marker} alt="marker" />
+                    <img src={marker} alt="marker" />
                   </Marker>
                 )
               })

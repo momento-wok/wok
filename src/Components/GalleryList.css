@@ -23,3 +23,8 @@
 .gallery-item > img {
   width: 100%;
 }
+
+.gallery-item > div {
+  margin: 8px 0;
+  text-transform: capitalize;
+}

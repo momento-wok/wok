@@ -35,3 +35,11 @@
   font-size: 16px;
   text-align: center;
 }
+
+#file-input-display.disabled {
+  opacity: 0.5;
+}
+
+#file-input-display.disabled #file-input {
+  cursor: not-allowed;
+}

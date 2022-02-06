@@ -18,8 +18,8 @@ class GalleryList extends React.Component {
               return (
                 <li className="gallery-item" key={location.thumbnailUrl} onClick={() => this.handleGalleryItemClick(i)}>
                   <img src={location.thumbnailUrl} alt="thumbnail" />
-                  <span style={{ fontWeight: "bold" }}>{location.name}</span>
-                  <span style={{ float: "right" }}>{DDToText(location.coordinates.longitude, location.coordinates.latitude)}</span>
+                  <div style={{ fontWeight: "bold" }}>{location.name}</div>
+                  <div>{DDToText(location.coordinates.longitude, location.coordinates.latitude)}</div>
                 </li>
               );
             })
