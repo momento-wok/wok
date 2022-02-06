@@ -54,7 +54,7 @@ class App extends React.Component {
           {
             view !== "home" &&
             <div className="nav">
-              <img src={inlineLogo} style={{ height: 54, imageRendering: "pixelated", padding: "0 16px" }} />
+              <img src={inlineLogo} style={{ height: 54, imageRendering: "pixelated", padding: "0 16px" }} alt="logo" />
               <div style={{ flexGrow: 1}} />
               <div className="button-wrapper">
                 <button onClick={() => this.setView("map")}>Map</button>
