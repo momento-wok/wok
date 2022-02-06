@@ -1,18 +1,13 @@
 import React from 'react';
 import exifr from 'exifr';
 import './UploadView.css';
-import { DMSToDD, DDToText } from "./../funcs";
+import { DMSToDD } from "./../funcs";
+import { uploadMemory } from "./../db/uploadorsomething";
 
 class UploadView extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      uploadCoordinates: {
-        longitude: 0,
-        latitude: 0
-      }
-    };
   }
 
   handleInputFileChange = async (ev) => {
@@ -20,12 +15,10 @@ class UploadView extends React.Component {
     let exifData = await exifr.parse(file, ['GPSLatitude', 'GPSLatitudeRef', 'GPSLongitude', 'GPSLongitudeRef']);
     let longitude = DMSToDD(exifData.GPSLongitude, exifData.GPSLongitudeRef);
     let latitude = DMSToDD(exifData.GPSLatitude, exifData.GPSLatitudeRef);
-    
-    this.setState({
-      uploadCoordinates: { longitude, latitude }
-    });
-    console.log(DDToText(longitude, latitude));
+
     document.querySelector("#file-input-display-text").innerHTML = file.name;
+
+    await uploadMemory(file, { longitude, latitude }, "YEEHA");
   }
 
   render() {
